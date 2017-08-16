@@ -1,13 +1,13 @@
 # bars
 
-web系列
+web
 
 
 
 
-python系列
+python
 
-[1.贪吃蛇]:https://github.com/bajiu/bars/blob/master/python/snake/snake.py
+[1.贪吃蛇](https://github.com/bajiu/bars/blob/master/python/snake/snake.py)
 
 
 
