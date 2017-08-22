@@ -1,7 +1,7 @@
 # bars
 
 web
-[1.vue自定义指令(拖动)]()
+[1.vue自定义指令(拖动)](https://bajiu.github.io/bars/frontEndDevelopment/vueMove.html)
 
 
 
