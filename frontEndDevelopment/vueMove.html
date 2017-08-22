@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    .move {
+      width: 100px;
+      height:100px;
+      background:#ff00ff;
+      position:absolute;
+      left : calc(50% - 50px);
+      top: calc(50% - 100px);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div class="move" v-move="msg" ></div>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script>
+    /* vue-自定义指令-拖拽 */
+    Vue.directive('move', function(el) {
+      var oDiv = el;
+      oDiv.onmousedown = function(ev) {
+        var disX = ev.clientX - oDiv.offsetLeft;
+        var disY = ev.clientY - oDiv.offsetTop;
+        document.onmousemove = function(ev) {
+          var l = ev.clientX - disX;
+          var t = ev.clientY - disY;
+          oDiv.style.left = l + 'px';
+          oDiv.style.top = t + 'px';
+        };
+        document.onmouseup = function() {
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+      };
+    });
+    var vm = new Vue({
+      el: '#box',
+      data: {
+        msg: 'this is move test'
+      }
+    });
+  </script>
+</body>
+
+</html>
