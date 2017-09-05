@@ -40,6 +40,9 @@
         };
       };
     });
+    document.onselectstart = function() {
+      return false;
+    }
     var vm = new Vue({
       el: '#box',
       data: {
