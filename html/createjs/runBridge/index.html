@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>bridge</title>
+<style media="screen">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	html,body{
+		width: 100%;
+		height: 100%;
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+	#canvas{
+		display: block;
+		border: 0;
+		margin: 0 auto;
+		width: 1024px;
+		height: 768px;
+	}
+</style>
+<script src="../js/easeljs-0.8.1.min.js"></script>
+<script src="../js/tweenjs-0.6.1.min.js"></script>
+<script src="../js/movieclip-0.8.1.min.js"></script>
+<script src="./l5.js"></script>
+<script src="./index.js" charset="utf-8"></script>
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	exportRoot = new lib.l5();
+
+	stage = new createjs.Stage(canvas);
+	window.begin()
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();">
+	<canvas id="canvas" width="910" height="640"></canvas>
+</body>
+</html>
