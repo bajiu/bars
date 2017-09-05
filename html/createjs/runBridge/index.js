@@ -438,7 +438,6 @@ let fn = {
 
 window.begin = function() {
   fn.init(stage, exportRoot, conf);
-
 }
 
 
