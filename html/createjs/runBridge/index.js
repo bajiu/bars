@@ -57,7 +57,7 @@ let fn = {
     this.stage = stage;
     this.el = el;
     this.conf = conf;
-    el.gotoAndStop(0)
+    el.gotoAndStop(1)
     el.main.Time_mc.gotoAndStop(0);
     this.clearMovie()
     this.bindEvt()

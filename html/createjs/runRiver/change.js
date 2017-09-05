@@ -130,9 +130,9 @@ let fn = {
     })
   },
   runRiver(){
-    exportRoot.main.help.visible = false;
     let timer = 0;
     if(window.conf.inShipPerson.length > 0){
+      exportRoot.main.help.visible = false;
       window.conf.inShipPerson[0] == 0 && (timer = 2000);
       window.conf.inShipPerson[0] == 1 && (timer = 5000);
       window.conf.inShipPerson[0] == 2 && (timer = 3000);
@@ -206,13 +206,8 @@ let fn = {
   }
 }
 window.begin = function(){
-  exportRoot.gotoAndStop(0);
-  // fn.init(exportRoot)
-
-  // exportRoot.gotoAndStop(0);
   exportRoot.asd.sp.gotoAndStop(0)
-  exportRoot.demo.on('click', function(){
     fn.init(exportRoot)
     exportRoot.gotoAndStop(1);
-  })
+
 }
