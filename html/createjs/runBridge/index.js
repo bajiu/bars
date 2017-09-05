@@ -53,7 +53,6 @@ let fn = {
       console.log('类型不对');
       return false;
     }
-
     this.stage = stage;
     this.el = el;
     this.conf = conf;
@@ -101,6 +100,7 @@ let fn = {
   choosePeople() {
     //this指向有问题
     //judge dir
+
     if (fn.base.dir) {
       let canChoose = false;
       for (let i in fn.base.leftPerson) {
@@ -122,18 +122,26 @@ let fn = {
         return false
       }
     }
-    fn.showBoard(this.num)
     if (fn.base.choosed.length == 0) {
       fn.base.runTime = this.timer;
+      fn.showBoard(this.num)
+    }else if(fn.base.choosed.length == 1){
+      if(fn.base.choosed[0] == this.num ){
+        return false;
+      }
+      if(this.num > fn.base.choosed[0]){
+        fn.base.runTime = this.timer;
+        fn.showBoard(this.num)
+      }
     }
     if (fn.base.choosed.length >= 2) {
       return false;
     }
     fn.el.main[fn.conf.hint[this.num]].gotoAndStop(1)
     fn.base.choosed.push(this.num)
-
   },
   showBoard(num) {
+    this.el.main.input_baiban.visible = true;
     this.el.main.input_baiban.gotoAndStop(num);
     num == 0 && (this.el.main.input_baiban.x = 31);
     num == 1 && (this.el.main.input_baiban.x = 135);
@@ -153,8 +161,6 @@ let fn = {
     this.base.canClick = false;
     let el0, el1;
     el0 = this.el.main[this.conf.person[this.base.choosed[0]]]
-    this.base.store = this.base.store + (el0.timer/1000);
-    this.el.main.minute_txt.text = this.base.store
     if(this.base.store >= 15){
       this.base.die = true;
     }
@@ -162,8 +168,19 @@ let fn = {
       this.runOne(el0)
     } else if (this.base.choosed.length == 2) {
       el1 = this.el.main[this.conf.person[this.base.choosed[1]]]
-      this.runTwo(el0, el1)
+      if(el1.num > el0.num){
+        this.runTwo(el1, el0)
+      }else{
+        this.runTwo(el0, el1)
+      }
     }
+    if(el1 == undefined){
+      this.base.store = this.base.store + (el0.timer/1000);
+    }else{
+      (el1.num > el0.num) ? this.base.store = this.base.store + (el1.timer/1000):this.base.store = this.base.store + (el0.timer/1000);
+    }
+    this.el.main.minute_txt.text = this.base.store
+
   },
   runOne(el) {
     let _this = this;
@@ -192,12 +209,13 @@ let fn = {
                 x: setX
               }, this.base.runTime/2)
               .call(() => {
-                this.toogleShirt();
+
                 el.gotoAndStop(1)
                 createjs.Tween.get(el).to({
                   x: this.base.coord.bank[el.num].leftX,
                   y: this.base.coord.bank[el.num].rightY
                 }, 1000).call(() => {
+                  this.toogleShirt();
                   el.gotoAndStop(0)
                   el.scaleX = -el.scaleX
                   this.base.dir = !this.base.dir
@@ -227,12 +245,13 @@ let fn = {
                 x: this.base.coord.toBirdge.x
               }, this.base.runTime/2)
               .call(() => {
-                this.toogleShirt();
+
                 el.gotoAndStop(1)
                 createjs.Tween.get(el).to({
                   x: this.base.coord.bank[el.num].rightX,
                   y: this.base.coord.bank[el.num].rightY
                 }, 1000).call(() => {
+                  this.toogleShirt();
                   el.gotoAndStop(0)
                   el.scaleX = -el.scaleX
                   this.base.dir = !this.base.dir
@@ -285,7 +304,6 @@ let fn = {
                   x: this.base.coord.toBirdge.x - 40
                 }, this.base.runTime/2)
                 .call(() => {
-                  this.toogleShirt();
                   el0.gotoAndStop(1)
                   el1.gotoAndStop(1)
                   createjs.Tween.get(el0).to({
@@ -305,11 +323,7 @@ let fn = {
                   this.base.dir = !this.base.dir;
                   this.moveOver([el0, el1])
                 })
-
             })
-
-
-
         })
       })
   },
@@ -337,12 +351,11 @@ let fn = {
               }
               createjs.Tween.get(el1).to({
                   x: setX - (this.el.main.go_mc_main.nominalBounds.width * 3 / 4) + 40
-                }, this.base.runTime)
+                }, this.base.runTime/2)
               createjs.Tween.get(el0).to({
                 x: setX - (this.el.main.go_mc_main.nominalBounds.width * 3 / 4)
-              }, this.base.runTime)
+              }, this.base.runTime/2)
               .call(() => {
-                this.toogleShirt();
                 el0.gotoAndStop(1)
                 el1.gotoAndStop(1)
                 createjs.Tween.get(el0).to({
@@ -409,6 +422,7 @@ let fn = {
         }
       })
     }
+    this.el.main.input_baiban.visible = false;
     // console.log(fn.base.leftPerson);
   },
   clear() {
@@ -430,22 +444,11 @@ let fn = {
     }
     this.el.main.go_mc_main.gotoAndStop(1);
     this.el.main.Time_mc.gotoAndStop(0)
+    this.el.main.fire.visible = false;
     this.gameOver()
   }
 
 }
-
-
 window.begin = function() {
   fn.init(stage, exportRoot, conf);
 }
-
-
-
-
-
-
-
-
-
-//

@@ -6821,6 +6821,27 @@ p.nominalBounds = new cjs.Rectangle(-38.5,-159.8,187.9,168.5);
 p.nominalBounds = new cjs.Rectangle(-39.8,-158.9,187.9,168.5);
 
 
+(lib.akdad = function() {
+	this.initialize();
+
+	// 图层 1
+	this.instance = new lib.xespeiyou_com__1_53_44476();
+	this.instance.setTransform(-194.7,48.1,0.199,0.199,0,0,0,-703.3,-109.3);
+
+	this.instance_1 = new lib.xespeiyou_com__1_53_44476();
+	this.instance_1.setTransform(24.3,48.1,0.199,0.199,0,0,0,-703.3,-109.3);
+
+	this.instance_2 = new lib.xespeiyou_com__1_53_44476();
+	this.instance_2.setTransform(77.4,48.1,0.164,0.164,0,0,0,-703.4,-109.3);
+
+	this.instance_3 = new lib.xespeiyou_com__1_53_44476();
+	this.instance_3.setTransform(200.4,48.1,0.164,0.164,0,0,0,-703.4,-109.3);
+
+	this.addChild(this.instance_3,this.instance_2,this.instance_1,this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(-226.7,-48,453.4,96.1);
+
+
 (lib.xespeiyou_com__1_270_73546 = function() {
 	this.initialize();
 
@@ -10419,17 +10440,8 @@ p.nominalBounds = new cjs.Rectangle(-35,-117.9,75.6,115.3);
 	this.initialize();
 
 	// 图层 2
-	this.instance = new lib.xespeiyou_com__1_53_44476();
-	this.instance.setTransform(140.9,298,0.199,0.199,0,0,0,-703.3,-109.3);
-
-	this.instance_1 = new lib.xespeiyou_com__1_53_44476();
-	this.instance_1.setTransform(360,298,0.199,0.199,0,0,0,-703.3,-109.3);
-
-	this.instance_2 = new lib.xespeiyou_com__1_53_44476();
-	this.instance_2.setTransform(413,298,0.164,0.164,0,0,0,-703.4,-109.3);
-
-	this.instance_3 = new lib.xespeiyou_com__1_53_44476();
-	this.instance_3.setTransform(536,298,0.164,0.164,0,0,0,-703.4,-109.3);
+	this.fire = new lib.akdad();
+	this.fire.setTransform(335.7,249.9);
 
 	// 图层 1
 	this.cls_mc_btn = new lib.xespeiyou_com__1_55_63460();
@@ -10484,7 +10496,7 @@ p.nominalBounds = new cjs.Rectangle(-35,-117.9,75.6,115.3);
 	this.go_mc_main = new lib.xespeiyou_com__1_42_62259();
 	this.go_mc_main.setTransform(353.8,281.1,1,1,0,0,0,242.8,17.6);
 
-	this.addChild(this.go_mc_main,this.person1,this.h4,this.h3,this.h2,this.h1,this.input_baiban,this.glim_mc,this.person2,this.person3,this.person4,this.Time_mc,this.board,this.minute_txt,this.go_mc_btn,this.cls_mc_btn,this.instance_3,this.instance_2,this.instance_1,this.instance);
+	this.addChild(this.go_mc_main,this.person1,this.h4,this.h3,this.h2,this.h1,this.input_baiban,this.glim_mc,this.person2,this.person3,this.person4,this.Time_mc,this.board,this.minute_txt,this.go_mc_btn,this.cls_mc_btn,this.fire);
 }).prototype = p = new cjs.Container();
 p.nominalBounds = new cjs.Rectangle(-70.9,-96.2,872.5,585.1);
 

@@ -58,11 +58,11 @@ let fn = {
             exportRoot.main['p' + [this.num + 3]].visible = false;
           }
           if(window.conf.inShipPerson.length == 1){
-            exportRoot.main.ship.gotoAndStop(this.num + 2)
             window.conf.ship = this.num + 2
-            exportRoot.main.ship[window.conf.shipArr[this.num + 2]].p.visible = false;
+            exportRoot.main.ship.gotoAndStop(window.conf.ship)
+            exportRoot.main.ship[window.conf.shipArr[window.conf.ship]].p.visible = false;
             //暂停划船动画
-            exportRoot.main.ship[window.conf.shipArr[this.num + 2]].stop()
+            exportRoot.main.ship[window.conf.shipArr[window.conf.ship]].stop()
           }else{
             exportRoot.main.ship[window.conf.shipArr[window.conf.ship]].p.visible = true;
             exportRoot.main.ship[window.conf.shipArr[window.conf.ship]].p.gotoAndStop(this.num);
@@ -78,11 +78,10 @@ let fn = {
           if(!window.conf.dir){
             exportRoot.main[window.conf.person[this.num]].visible = false;
           }else{
-
-            exportRoot.main['p' + this.num ].visible = false;
-
+            exportRoot.main['p' + this.num].visible = false;
           }
           if(window.conf.inShipPerson.length == 1){
+
             exportRoot.main.ship.gotoAndStop(this.num - 1)
             window.conf.ship = this.num - 3 + 2
             exportRoot.main.ship[window.conf.shipArr[this.num - 1]].p.visible = false;
@@ -117,7 +116,6 @@ let fn = {
       exportRoot.main[el].gotoAndStop(0);
     })
     window.conf.person.forEach((el,index) => {
-      // !window.conf.dir ? exportRoot.main['p' + index].visible = true : exportRoot.main['p' + (index + 3)].visible = true;
       for(let i = 0 ; i < 6 ; i++){
         exportRoot.main['p' + index].visible = false;
       }
@@ -130,9 +128,9 @@ let fn = {
     })
   },
   runRiver(){
+    exportRoot.main.help.visible = false;
     let timer = 0;
     if(window.conf.inShipPerson.length > 0){
-      exportRoot.main.help.visible = false;
       window.conf.inShipPerson[0] == 0 && (timer = 2000);
       window.conf.inShipPerson[0] == 1 && (timer = 5000);
       window.conf.inShipPerson[0] == 2 && (timer = 3000);
@@ -149,7 +147,6 @@ let fn = {
       }else{
         //to right
         createjs.Tween.get(exportRoot.main.ship).to({x: window.conf.toRightPos}, timer).call(fn.changePersonPos);
-
       }
       document.getElementById('Sound').play()
       exportRoot.main.ship[window.conf.shipArr[window.conf.ship]].gotoAndStop(1)
@@ -170,12 +167,11 @@ let fn = {
     // exportRoot.main.text.text = 0
     if(!window.conf.dir){
       //左划
-
       for(let i in window.conf.inShipPerson){
         window.conf.leftPerson.push(window.conf.inShipPerson[i] + 3)
       }
-      for(let n = 0 ; n < window.conf.rightPerson.length; n++){
-        for(let m = 0 ; m < window.conf.inShipPerson.length ; m ++ ){
+      for(let n = window.conf.rightPerson.length-1 ; n >= 0; n--){
+        for(let m = window.conf.inShipPerson.length-1 ; m >= 0 ; m-- ){
           if(window.conf.rightPerson[n] == window.conf.inShipPerson[m]){
             window.conf.rightPerson.splice(n, 1);
           }
@@ -185,8 +181,8 @@ let fn = {
       for(let i in window.conf.inShipPerson){
         window.conf.rightPerson.push(window.conf.inShipPerson[i] - 3)
       }
-      for(let n = 0 ; n < window.conf.leftPerson.length; n++){
-        for(let m = 0 ; m < window.conf.inShipPerson.length ; m ++ ){
+      for(let n = window.conf.leftPerson.length-1 ; n >= 0 ; n--){
+        for(let m = window.conf.inShipPerson.length-1 ; m >= 0  ; m-- ){
           if(window.conf.leftPerson[n] == window.conf.inShipPerson[m]){
             window.conf.leftPerson.splice(n, 1);
           }
@@ -197,8 +193,6 @@ let fn = {
     window.conf.clockBtn.forEach((el,index) =>{
       exportRoot.main[el].gotoAndStop(0);;
     })
-    //console.log(window.conf.leftPerson);
-    //console.log(window.conf.rightPerson);
     window.conf.inShipPerson = []
     setTimeout(() => {
       window.conf.dir = !window.conf.dir
@@ -207,7 +201,6 @@ let fn = {
 }
 window.begin = function(){
   exportRoot.asd.sp.gotoAndStop(0)
-    fn.init(exportRoot)
-    exportRoot.gotoAndStop(1);
-
+  fn.init(exportRoot)
+  exportRoot.gotoAndStop(1);
 }

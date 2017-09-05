@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>过河</title>
+<title>l4</title>
 <style media="screen">
 	*{
 		margin: 0;
@@ -45,12 +45,13 @@ function handleComplete(evt) {
 	exportRoot = new lib.l4();
 
 	stage = new createjs.Stage(canvas);
-	window.begin();
+
 	stage.addChild(exportRoot);
 	stage.update();
 
 	createjs.Ticker.setFPS(lib.properties.fps);
 	createjs.Ticker.addEventListener("tick", stage);
+	window.begin();
 }
 
 function playSound(id, loop) {
@@ -59,8 +60,8 @@ function playSound(id, loop) {
 </script>
 </head>
 
-<body onload="init();" >
-	<canvas id="canvas" width="910" height="640" ></canvas>
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="910" height="640" style="background-color:#FFFFFF"></canvas>
 	<audio id='Sound' src="./sounds/sound.mp3" loop ></audio>
 </body>
 </html>
