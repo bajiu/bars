@@ -4,9 +4,11 @@ web
 
 [1.vue自定义指令(拖动)](https://bajiu.github.io/bars/html/vueMove.html)
 
-[2.过桥小游戏(createjs)](https://bajiu.github.io/bars/html/createjs/runBridge/index.html)
+[2.过河小游戏(createjs)](https://bajiu.github.io/bars/html/createjs/runRiver/index.html)
 
-[3.过河小游戏(createjs)](https://bajiu.github.io/bars/html/createjs/runRiver/index.html)
+[3.过桥小游戏(createjs)](https://bajiu.github.io/bars/html/createjs/runBridge/index.html)
+
+
 
 
 
