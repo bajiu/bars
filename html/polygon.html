@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>不规则多边形</title>
+</head>
+
+<body>
+
+
+  <canvas id="canvas"></canvas>
+
+
+  <script type="text/javascript">
+    document.addEventListener('touchmove', function(e) {
+      e.preventDefault()
+    })
+
+    let el = {
+      idName: "canvas",
+      width: window.innerWidth,
+      height: window.innerHeight,
+      pr: 1, //设备像素比
+      initating: 90, //初始距离
+      r: 0,
+    };
+    var fn = {
+      
+      arr: [],
+      el: {},
+      makeConfig: function(el) {
+        this.el = el;
+        let canvas = document.getElementById(this.el.idName),
+          context = canvas.getContext('2d')
+        canvas.width = this.el.width * this.el.pr;
+        canvas.height = this.el.height * this.el.pr;
+        context.scale(this.el.pr, this.el.pr)
+        context.globalAlpha = 0.6
+        this.arr = [{
+          x: 0,
+          y: canvas.height * 0.7 + this.el.initating
+        }, {
+          x: 0,
+          y: canvas.height * 0.7 - this.el.initating
+        }]
+        while (this.arr[1].x < canvas.width + this.el.initating) fn.draw(this.arr[0], this.arr[1], context)
+      },
+      draw: function(i, j, x) {
+        x.beginPath();
+        x.moveTo(i.x, i.y);
+        x.lineTo(j.x, j.y);
+        let newX = j.x + (Math.random() * 2 - 0.25) * this.el.initating;
+        let newY = this.setY(j.y);
+        x.lineTo(newX, newY);
+        x.closePath();
+        this.el.r -= Math.PI * 2 / -50;
+        x.fillStyle = '#' + (Math.cos(this.el.r) * 127 + 128 << 16 | Math.cos(this.el.r + Math.PI * 2 / 3) * 127 + 128 << 8 | Math.cos(this.el.r + Math.PI * 2 / 3 * 2) * 127 + 128).toString(16)
+        x.fill()
+        this.arr[0] = this.arr[1];
+        this.arr[1] = {
+          x: newX,
+          y: newY
+        }
+      },
+      setY: function(p) {
+        var height = p + (Math.random() * 2 - 1.1) * this.el.initating
+        return (height > this.el.height || height < 0) ? this.setY(p) : height;
+      }
+    }
+
+    fn.makeConfig(el);
+    document.onclick = function(){
+      fn.makeConfig(el);
+    }
+
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>

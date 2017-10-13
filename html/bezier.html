@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>bezier</title>
+  <style media="screen">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      background-color: rgb(118, 218, 255);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<div class="box" style="width:100px;height:0px;">
+
+</div>
+
+<body>
+  <script type="text/javascript">
+    function Bezier(p1x, p1y, p2x, p2y) {
+      this.cx = 3 * p1x;
+      this.bx = 3 * (p2x - p1x) - this.cx;
+      this.ax = 1 - this.cx - this.bx;
+      this.cy = 3 * p1y;
+      this.by = 3 * (p2y - p1y) - this.cy;
+      this.ay = 1 - this.cy - this.by;
+    }
+    Bezier.prototype = {
+      sampleCurveX: function(t) {
+        return ((this.ax * t + this.bx) * t + this.cx) * t;
+      },
+      sampleCurveY: function(t) {
+        return ((this.ay * t + this.by) * t + this.cy) * t;
+      }
+    }
+    let bezier = new Bezier(0.25, 0.01, 0.25, 1);
+    let num = 0
+    let timer = setInterval(() => {
+      // console.log(bezier.sampleCurveY(num+=0.1));
+      let height = bezier.sampleCurveY(num += 0.01) * 100
+      document.getElementsByTagName('div')[0].style.height = height + 'px';
+      if (num >= 1) {
+        clearInterval(timer)
+      }
+    }, 20)
+
+
+
+
+    // let a = new Bezier(0,0,1,1);
+    // let num = 1
+    // setTimeout(()=>{
+    //   console.log(a.sampleCurveX(2));
+    //   console.log(a.sampleCurveY(1));
+    // },1000)
+  </script>
+</body>
+
+</html>
