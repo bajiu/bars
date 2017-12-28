@@ -4,9 +4,9 @@ web
 
 [1.vue自定义指令(拖动)](https://bajiu.github.io/bars/html/vueMove.html)
 
-[2.过河小游戏(createjs)](https://bajiu.github.io/bars/html/createjs/runRiver/index.html)
+[2.无聊的过河小游戏](https://bajiu.github.io/bars/html/createjs/runRiver/index.html)
 
-[3.过桥小游戏(createjs)](https://bajiu.github.io/bars/html/createjs/runBridge/index.html)
+[3.无聊的过桥小游戏](https://bajiu.github.io/bars/html/createjs/runBridge/index.html)
 
 [4.贝塞尔ease缓动js实现](https://bajiu.github.io/bars/html/bezier.html)
 
@@ -22,7 +22,9 @@ web
 
 [10.黑客帝国字母效果](https://bajiu.github.io/bars/html/viewCode.html)
 
+[11.截图大法](https://bajiu.github.io/bars/html/cutPic.html)
 
+[12.iphoneX齐刘海特效](https://bajiu.github.io/bars/html/liuhai.html)
 
 python
 

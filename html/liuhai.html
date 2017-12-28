@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title></title>
+  <style media="screen">
+    .box {
+      max-width: 414px;
+      height: 480px;
+      border: solid #000;
+      margin: auto;
+      overflow: auto;
+    }
+    .shape {
+      float: left;
+      width: 30px;
+      height: 180px;
+      margin-top: 150px;
+      -webkit-shape-outside: url('./img/liu-outside.png');
+      shape-outside: url('./img/liu-outside.png');
+      transition: margin-top .15s;
+    }
+    .liuhai {
+      width: 24px;
+      height: 180px;
+      background: url('./img/liu.png') no-repeat left center;
+      position: absolute;
+      margin-top: 150px;
+    }
+    .content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .content li {
+      border-bottom: 1px solid #eee;
+      padding: .5em;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" class="box">
+    <i id="shape" class="shape"></i>
+    <i class="liuhai"></i>
+    <div class="content">
+      <ul>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+        <li>文字文字文字文字文字文字文字文字</li>
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var shape = document.getElementsByClassName('shape')[0];
+    var box = document.getElementById('box');
+
+    function sp() {
+      var scrollTop = box.scrollTop;
+      shape.style.marginTop = (150 + scrollTop) + 'px';
+    }
+
+    box.addEventListener('scroll', sp);
+    sp()
+  </script>
+</body>
+
+</html>
