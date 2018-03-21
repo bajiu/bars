@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
@@ -12,6 +13,7 @@
       margin: auto;
       overflow: auto;
     }
+
     .shape {
       float: left;
       width: 30px;
@@ -21,6 +23,7 @@
       shape-outside: url('./img/liu-outside.png');
       transition: margin-top .15s;
     }
+
     .liuhai {
       width: 24px;
       height: 180px;
@@ -28,11 +31,13 @@
       position: absolute;
       margin-top: 150px;
     }
+
     .content ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
+
     .content li {
       border-bottom: 1px solid #eee;
       padding: .5em;
@@ -80,6 +85,7 @@
 
     box.addEventListener('scroll', sp);
     sp()
+    console.log(~~ (Math.pow(2, 31)));
   </script>
 </body>
 
