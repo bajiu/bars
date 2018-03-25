@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>vue Echarts 组件</title>
+</head>
+
+<body>
+  <div id="box">
+    <Charts id="test" />
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts-en.common.js"></script>
+
+
+  <script type="text/javascript">
+    Vue.prototype.$echarts = echarts;
+    Vue.component('Charts', {
+      template: `<div :id="id" :style="style"></div>`,
+      data() {
+        return {
+          //echarts实例
+          chart: ""
+        };
+      },
+      props: {
+        //父组件需要传递的参数：id，width，height，option
+        id: {
+          type: String
+        },
+        width: {
+          type: String,
+          default: "100%"
+        },
+        height: {
+          type: String,
+          default: "300px"
+        },
+        option: {
+          type: Object,
+          //Object类型的prop值一定要用函数return出来，
+          //不然会报错。原理和data是一样的，
+          //使用闭包保证一个vue实例拥有自己的一份props
+          default () {
+            return {
+              title: {
+                text: "vue-Echarts"
+              },
+              xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+              },
+              yAxis: {
+                type: 'value'
+              },
+              series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line',
+                smooth: true
+              }]
+            };
+          }
+        }
+      },
+      computed: {
+        style() {
+          return {
+            height: this.height,
+            width: this.width
+          };
+        }
+      },
+      mounted() {
+        this.init();
+      },
+      methods: {
+        init() {
+          this.chart = this.$echarts.init(document.getElementById(this.id));
+          this.chart.setOption(this.option);
+          window.addEventListener("resize", this.chart.resize);
+        }
+      }
+    })
+
+    var vm = new Vue({
+      el: '#box',
+      mounted() {}
+    });
+  </script>
+</body>
+
+</html>
