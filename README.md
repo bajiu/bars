@@ -26,6 +26,8 @@ web
 
 [12.iphoneX齐刘海特效](https://bajiu.github.io/bars/html/liuhai.html)
 
+[13.vue引用charts组件](https://bajiu.github.io/bars/html/vueCharts.html)
+
 python
 
 [1.贪吃蛇](https://github.com/bajiu/bars/blob/master/python/snake/snake.py)
