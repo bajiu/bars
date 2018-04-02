@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <canvas id="dog" style="position:fixed;left:0;bottom:0"></canvas>
+  <script type="text/javascript">
+    let canvas = document.querySelector("#dog");
+    canvas.width = window.innerWidth;
+    canvas.height = 200;
+
+    let img = new Image();
+    img.onload = function() {
+      beginDraw(img);
+    };
+    img.src = "./img/dog/0.png";
+
+
+    class DogAnimation {
+      constructor(canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = 200;
+        // 存放加载后狗的图片
+        this.dogPictures = [];
+        // 图片目录
+        this.RES_PATH = "./img/dog/";
+        this.IMG_COUNT = 8;
+        this.start();
+      }
+      start() {
+        this.loadResources();
+      }
+      loadResources() {
+
+      }
+
+    }
+    let canvas = document.querySelector("#dog-walking");
+    let dogAnimation = new DogAnimation(canvas);
+    dogAnimation.start();
+  </script>
+
+</body>
+
+</html>

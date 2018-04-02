@@ -28,6 +28,8 @@ web
 
 [13.vue引用charts组件](https://bajiu.github.io/bars/html/vueCharts.html)
 
+[13.vue使用svg底部滑动样式组件](https://bajiu.github.io/bars/html/vueTabMove.html)
+
 python
 
 [1.贪吃蛇](https://github.com/bajiu/bars/blob/master/python/snake/snake.py)

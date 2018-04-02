@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+  <title></title>
+  <style media="screen">
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .tabUl {
+    list-style: none;
+    padding: 0;
+    overflow: hidden;
+  }
+  .tabLi {
+    float: left;
+    padding: 5px 0;
+    /* width: 80px; */
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+
+  }
+  .tabLi svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%
+
+  }
+  #svg-underline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  #tabList{
+    position: absolute;
+    overflow: hidden;
+  }
+  </style>
+
+
+</head>
+
+<body>
+
+  <div id="box">
+    <Tab id="tabList"></Tab>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script type="text/javascript">
+    Vue.component('Tab', {
+      template: `<div :id='id' v-bind:style="{ height: height }">
+      <ul class="tabUl">
+        <li class='tabLi' v-for='el , $index in list'  v-bind:style="{ width: width }" >
+        {{el.tabName}}
+        <svg>
+            <rect :id='el.id' x="0" y="0" width="100%" height="100%" fill="transparent"></rect>
+        </svg>
+        </li>
+      </ul>
+      <svg id="svg-underline" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="1">
+        <rect id="nav-underline" x=0 y=0 :width="width" height="2" :stroke="color" stroke-width="2" />
+        <animate v-for='ani,$index in list' xlink:href="#nav-underline" attributeName="x" :to="$index *  svgLineWidth" dur=".2s" :begin="ani.id + '.mouseenter'" fill="freeze"></animate>
+      </svg>
+      </div>`,
+      props: {
+        id: {
+          type: String
+        },
+        describe: {
+          type: String,
+          default: `defaultTab`
+        },
+        width: {
+          type: String,
+          default() {
+            return '80px'
+          }
+        },
+        color: {
+          type: String,
+          default: `#000`
+        },
+        height: {
+          type: String,
+          default() {
+            return '38px'
+          }
+        },
+        list: {
+          type: Array,
+          default: function () {
+              return [
+                {
+                tabName: '列表1'
+              },
+              {
+                tabName: '列表2'
+              },
+              {
+                tabName: '列表3'
+              },
+              {
+                tabName: '列表4'
+              }
+            ]
+          }
+        },
+      },
+      data() {
+        return {
+          svgLineWidth: 0
+        }
+      },
+      created() {
+        this.list.map((val,index) => {
+          val.id = this.describe + index;
+        })
+        this.svgLineWidth = parseFloat(this.width)
+      }
+    })
+    var vm = new Vue({
+      el: '#box',
+      mounted() {
+
+      }
+    });
+    // <animate xlink:href="#nav-underline" attributeName="x" to="0" dur=".2s" begin="defaultTab0.mouseenter" fill="freeze"></animate>
+    // <animate xlink:href="#nav-underline" attributeName="x" to="80" dur=".2s" begin="defaultTab1.mouseenter" fill="freeze"></animate>
+    // <animate xlink:href="#nav-underline" attributeName="x" to="160" dur=".2s" begin="defaultTab2.mouseenter" fill="freeze"></animate>
+    // <animate xlink:href="#nav-underline" attributeName="x" to="240" dur=".2s" begin="defaultTab3.mouseenter" fill="freeze"></animate>
+  </script>
+
+
+
+
+</body>
+
+</html>
