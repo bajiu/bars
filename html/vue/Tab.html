@@ -50,14 +50,14 @@
 <body>
 
   <div id="box">
-    <Tab id="tabList"></Tab>
+    <Tab id="tabList" v-on:sonClick="fatherClick"></Tab>
   </div>
   <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
   <script type="text/javascript">
     Vue.component('Tab', {
       template: `<div :id='id' v-bind:style="{ height: height }">
       <ul class="tabUl">
-        <li class='tabLi' v-for='el , $index in list'  v-bind:style="{ width: width }" >
+        <li class='tabLi' v-for='el , $index in list'  v-bind:style="{ width: width }" v-on:click="sonClick(el,$index)">
         {{el.tabName}}
         <svg>
             <rect :id='el.id' x="0" y="0" width="100%" height="100%" fill="transparent"></rect>
@@ -123,12 +123,23 @@
           val.id = this.describe + index;
         })
         this.svgLineWidth = parseFloat(this.width)
+      },
+      methods: {
+        sonClick(el,index){
+          this.$emit('sonClick',index);
+        }
       }
+
     })
     var vm = new Vue({
       el: '#box',
       mounted() {
 
+      },
+      methods: {
+        fatherClick(index) {
+          console.log(index);
+        }
       }
     });
     // <animate xlink:href="#nav-underline" attributeName="x" to="0" dur=".2s" begin="defaultTab0.mouseenter" fill="freeze"></animate>
