@@ -8,6 +8,8 @@
 
 [vue使用svg底部滑动样式组件](https://bajiu.github.io/bars/html/vue/Tab.html)
 
+[基本没有样式和逻辑的好多级联动](https://bajiu.github.io/bars/html/vue/Select.html)
+
 
 ### 头发的特效
 
@@ -35,6 +37,10 @@
 
 [截图大法](https://bajiu.github.io/bars/html/other/cutPic.html)
 
+[双向绑定之循环监听触发](https://bajiu.github.io/bars/html/other/mvvm_1.html)
+
+[双向绑定之数据劫持](https://bajiu.github.io/bars/html/other/mvvm_2.html)
+
 ### 前端怎么能不会写游戏
 
 [python贪吃蛇](https://github.com/bajiu/bars/python/snake/snake.py)
@@ -42,6 +48,12 @@
 [createJs无聊小游戏](https://bajiu.github.io/bars/html/game/runRiver/index.html)
 
 [createJs无聊小游戏第二弹](https://bajiu.github.io/bars//html/game/runBridge/index.html)
+
+### 工具们
+
+#### python3.6
+
+[图片批量重命名](https://github.com/bajiu/bars/python/change_Img.py)
 
 
 ## continue...

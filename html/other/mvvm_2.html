@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>双向绑定之数据劫持</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" b-model="val">
+      <p b-text="val"></p>
+      <p b-text="val"></p>
+    </div>
+
+    <script type="text/javascript">
+
+      let Box = (function(){
+        let Box = function(opt) {
+          let el = document.querySelector(opt.el);
+          let data = opt.data || {};
+
+          return Box.prototype.init(el, data);
+        };
+        Box.prototype = {
+          init:function(el,data){
+            console.log(el);
+            console.log(data);
+            this.el = el;
+            this.data = data;
+
+            this.bindModel();
+            this.bindText();
+          },
+          // 返回所有含有``b-*``属性的元素 [array]
+          bindAttr: function(el) {
+            let arr = [],
+              _this = this,
+              childs = el.childNodes,
+              len = childs.length,
+              attr,
+              lenAttr;
+            if (len) {
+              for (let i = 0; i < len; i++) {
+                el = childs[i];
+                //判断元素类型
+                if (el.nodeType === 1) {
+                  for (let j = 0; j < el.attributes.length || 0; j++) {
+                    attr = el.attributes[j];
+                    //如果发现·b-·则为目标元素
+                    if (attr.nodeName.indexOf('b-') >= 0) {
+                      arr.push(el);
+                      switch (attr.nodeName.slice(2)) {
+                        //判断是否为model
+                        case 'model':
+                          //绑定事件
+                          if (document.addEventListener) {
+                            el.addEventListener('keydown', function() {
+                              _this.digest();
+                            }, false);
+                          } else {
+                            el.attachEvent('onkeydown', function() {
+                              _this.digest();
+                            }, false);
+                          }
+                          break;
+
+                        default:
+                          break;
+                      }
+                    }
+                  }
+                  arr = arr.concat(this.bindAttr(el));
+                }
+              }
+            }
+            return arr;
+
+          },
+          bindModel: function(){
+            let modelArr = this.el.querySelectorAll('[b-model]'),
+            len = modelArr.length || 0,
+            _this = this,
+            model
+
+            for(let i = 0 ; i < len ; i++){
+              modelName = modelArr[i].getAttribute('b-model');
+              modelArr[i].value = this.data[modelName] || '';
+              //数据劫持
+              this.defineObj(this.data, modelName);
+              // keydown有响应差
+              modelArr[i].addEventListener('keyup', function(e) {
+                e = e || window.event;
+                _this.data[modelName] = e.target.value;
+              }, false);
+
+            }
+
+          },
+          bindText: function() {
+            let textDOMs = this.el.querySelectorAll('[b-text]'),
+                lenText = textDOMs.length,
+                prppText,
+                j;
+
+            for (j = 0; j < lenText; j++) {
+              propText = textDOMs[j].getAttribute('b-text');
+
+              textDOMs[j].innerHTML = this.data[propText] || '';
+            }
+          },
+          defineObj: function(obj, prop, value){
+            let _value = value || '',
+            _this = this;
+              Object.defineProperty(obj, prop, {
+                get: function() {
+                  return _value;
+                },
+                set: function(newVal) {
+                  _value = newVal;
+                  _this.bindText();
+                },
+                enumerable: true,
+                configurable: true
+              });
+          }
+        }
+
+
+        Box.prototype.init.prototype = Box.prototype;
+        return Box;
+      })()
+
+
+
+
+
+
+      let vm = new Box({
+        el: '#app',
+        data: {
+          val: 'bajiu'
+        }
+      })
+
+
+
+    </script>
+
+  </body>
+</html>

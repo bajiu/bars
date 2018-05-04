@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <div id="box">
+    <Select1 :list1="list1" :list2="list2"></Select1>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script type="text/javascript">
+    Vue.component('Select1', {
+      template: `<div>{{chooseData1}}
+                 <select v-model='chooseData1'>
+
+                   <option value="">请选择</option>
+                   <option v-for="(item , $index) in list1" :value="$index">{{item.tabName}}</option>
+                 </select>
+                 <select v-model='chooseData2'>
+
+                   <option value="">请选择</option>
+                   <option v-for="(item , $index) in list3" :value="$index">{{item.tabName}}</option>
+                 </select></div>`,
+      props: {
+        list1: {
+          type: Array,
+          default: function() {
+            return [{
+                tabName: '列表1'
+              },
+              {
+                tabName: '列表2'
+              },
+              {
+                tabName: '列表3'
+              },
+              {
+                tabName: '列表4'
+              }
+            ]
+          }
+        },
+        list2: {
+          type: Array,
+          default: function() {
+            return [{
+                tabName: '列表2_1'
+              },
+              {
+                tabName: '列表2_2'
+              },
+              {
+                tabName: '列表2_3'
+              },
+              {
+                tabName: '列表2_4'
+              }
+            ]
+          }
+        }
+      },
+      data() {
+        return {
+          chooseData1: '序列号',
+          chooseData2: '二级序列',
+          list3: []
+        }
+      },
+      watch: {
+        chooseData1(val) {
+          console.log(val);
+          if(val == 1){
+            this.list3 = this.list2;
+          }
+        }
+      }
+
+
+    })
+
+
+
+
+    var vm = new Vue({
+      el: '#box',
+      mounted() {
+        console.log('run this');
+      },
+      methods: {
+
+      },
+      data() {
+        return {
+          list1: [{
+              tabName: '列表1_1'
+            },
+            {
+              tabName: '列表1_2'
+            },
+            {
+              tabName: '列表1_3'
+            },
+            {
+              tabName: '列表1_4'
+            }
+          ],
+          list2: [{
+              tabName: '列表2_1'
+            },
+            {
+              tabName: '列表2_2'
+            },
+            {
+              tabName: '列表2_3'
+            },
+            {
+              tabName: '列表2_4'
+            }
+          ],
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

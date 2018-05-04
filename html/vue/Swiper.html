@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .next-task {
+      display: none;
+      transform: translateX(100%);
+      /* 添加一个动画，当改变transform的值时就会触发这个动画 */
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <!-- <swiper></swiper> -->
+    <div :class="{'next-task': nextIndex === evenIndex}" :is="'swiper' + question[evenIndex].type" ref="evenTask"></div>
+    <div :class="{'next-task': nextIndex === oddIndex}" :is="'swiper' + question[oddIndex].type" ref="oddTask"></div>
+    <button class="next-question" @click="nextQuestion">下一题</button>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script type="text/javascript">
+    let question = [{
+        index: 1,
+        type: 1,
+        content: '我是第一题'
+      }, {
+        index: 2,
+        type: 2,
+        content: '我是第二题'
+      },
+      {
+        index: 3,
+        type: 1,
+        content: '我是第三题'
+      }, {
+        index: 4,
+        type: 2,
+        content: '我是第四题'
+      }
+    ]
+    Vue.component('swiper1', {
+      template: `<h2>
+                    {{question.index}}. 填空题
+                 </h2>
+                 <div>{{content}}</div>`,
+      props: {
+        question: {
+          type: Array,
+          default () {
+            return question
+          }
+        }
+      }
+    })
+    Vue.component('swiper2', {
+      template: `<h2>
+                    {{question.index}}. 选择题
+                 </h2>
+                 <div>{{content}}</div>`,
+      props: {
+        question: {
+          type: Array,
+          default () {
+            return question
+          }
+        }
+      }
+    })
+
+
+
+
+    var vm = new Vue({
+      el: '#box',
+
+      methods: {
+        nextQuestion() {
+          this.currentIndex = (this.currentIndex + 1) % this.question.length;
+          console.log(this.currentIndex);
+          this.slideToNext();
+
+
+        },
+        slideToNext() {
+          // 当前slide的类型（currentIndex已经加1了，这里要反一下）
+          let currentType = this.currentIndex % 2 ? "even" : "odd",
+            // 下一个slide的类型
+            nextType = this.currentIndex % 2 ? "odd" : "even";
+          // 获取下一个slide的dom元素
+          let $nextSlide = this.$refs[`${nextType}Task`].$el;
+          $nextSlide.style.display = "block";
+          // 把下一个slide的translate值置为0，原本是translateX(100%)
+          setTimeout(() => {
+              $nextSlide.style.transform = "translateX(0)";
+              
+          }, 0);
+          // 等动画结束后更新数据
+          setTimeout(() => {
+            this.nextIndex = (this.currentIndex + 1) %
+              this.question.length;
+            // 原本的next是当前显示的slide
+            this[`${nextType}Index`] = this.currentIndex;
+            // 而原本的current slide要显示下下张的内容了
+            this[`${currentType}Index`] = this.nextIndex;
+          }, 500);
+        }
+      },
+      data() {
+        return {
+          currentIndex: 0,
+          nextIndex: 1, // 表示下一张index，值为currentIndex + 1
+          evenIndex: 0, // 偶数的index，值为currentIndex或者是currentIndex + 1
+          oddIndex: 1, // 奇数的index，值同上
+          question: question
+        }
+      },
+      mounted() {}
+    });
+  </script>
+
+
+
+
+
+</body>
+
+</html>

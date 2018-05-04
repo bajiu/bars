@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>双向绑定之循环监听触发</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" b-model="val">
+    <p b-text="val"></p>
+  </div>
+  <script type="text/javascript">
+    let Box = function(opt) {
+      let el = document.querySelector(opt.el),
+        data = opt.data || {}
+
+      return new Box.prototype.init(el, data);
+    }
+    Box.prototype = {
+      // constructor: Box,
+      name: 'bajiu',
+
+      init: function(el, data) {
+        this.el = el,
+        this.data = data;
+        this.els = this.bindAttr(el);
+
+      },
+      // 返回所有含有``b-*``属性的元素 [array]
+      bindAttr: function(el) {
+        let arr = [],
+          _this = this,
+          childs = el.childNodes,
+          len = childs.length,
+          attr,
+          lenAttr;
+        if (len) {
+          for (let i = 0; i < len; i++) {
+            el = childs[i];
+            //判断元素类型
+            if (el.nodeType === 1) {
+              for (let j = 0; j < el.attributes.length || 0; j++) {
+                attr = el.attributes[j];
+                //如果发现·b-·则为目标元素
+                if (attr.nodeName.indexOf('b-') >= 0) {
+                  arr.push(el);
+                  switch (attr.nodeName.slice(2)) {
+                    //判断是否为model
+                    case 'model':
+                      //绑定事件
+                      if (document.addEventListener) {
+                        el.addEventListener('keydown', function() {
+                          _this.digest();
+                        }, false);
+                      } else {
+                        el.attachEvent('onkeydown', function() {
+                          _this.digest();
+                        }, false);
+                      }
+                      break;
+
+                    default:
+                      break;
+                  }
+                }
+              }
+              arr = arr.concat(this.bindAttr(el));
+            }
+          }
+        }
+        return arr;
+
+      },
+      digest: function() {
+        let els = this.els,
+          data = this.data;
+        setTimeout(() => {
+          for (let i = 0; i < els.length || 0; i++) {
+            let el = els[i],
+              attrs = el.attributes;
+            for (let j = 0; j < attrs.length; j++) {
+              let attr = attrs[j];
+
+              if (attr.nodeName.indexOf('b-') >= 0) {
+                switch (attr.nodeName.slice(2)) {
+                  case 'model':
+                    console.log(data);
+                    data[attr.nodeValue] = el.value || '';
+                    console.log(el.value);
+                    break;
+
+                  case 'text':
+                    if (el.innerHTML !== data[attr.nodeValue]) {
+                      el.innerHTML = data[attr.nodeValue] || '';
+                    }
+                    break;
+
+                  default:
+                    console.error('少一个');
+                    break;
+                }
+              }
+            }
+          }
+        }, 0)
+      }
+
+
+
+
+    }
+
+
+
+
+
+
+
+    Box.prototype.init.prototype = Box.prototype;
+
+
+
+    let vm = Box({
+      el: '#app',
+      data: {
+        val: 'bajiu',
+
+      }
+    })
+  </script>
+</body>
+
+</html>
