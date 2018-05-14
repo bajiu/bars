@@ -41,13 +41,15 @@
 
 [双向绑定之数据劫持](https://bajiu.github.io/bars/html/other/mvvm_2.html)
 
-### 前端怎么能不会写游戏
+### 游戏引擎
 
 [python贪吃蛇](https://github.com/bajiu/bars/python/snake/snake.py)
 
 [createJs无聊小游戏](https://bajiu.github.io/bars/html/game/runRiver/index.html)
 
 [createJs无聊小游戏第二弹](https://bajiu.github.io/bars//html/game/runBridge/index.html)
+
+[cocosGL水波纹特效](https://bajiu.github.io/bars//cocos/water/build/web-mobile/index.html)
 
 ### 工具们
 
