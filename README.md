@@ -53,6 +53,8 @@
 
 [cocos creator分享](https://bajiu.github.io/bars//cocos/land/build/web-mobile/index.html)
 
+[cocos creator摇杆](https://bajiu.github.io/bars//cocos/rocker/build/web-mobile/index.html)
+
 ### 工具们
 
 #### python3.6
