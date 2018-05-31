@@ -51,11 +51,14 @@
 
 [cocosGL水波纹特效](https://bajiu.github.io/bars//cocos/water/build/web-mobile/index.html)
 
+[cocos creator分享](https://bajiu.github.io/bars//cocos/land/build/web-mobile/index.html)
+
 ### 工具们
 
 #### python3.6
 
-[图片批量重命名](https://github.com/bajiu/bars/python/change_Img.py)
+[图片批量重命名](https://github.com/bajiu/bars/python/tools/change_Img.py)
 
+[图片批量压缩](https://github.com/bajiu/bars/python/tools/reduce_img.py)
 
 ## continue...
